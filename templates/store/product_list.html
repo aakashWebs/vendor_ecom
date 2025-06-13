@@ -8,6 +8,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Image</th>
       <th>Name</th>
       <th>Price</th>
       <th>Actions</th>
@@ -16,6 +17,11 @@
   <tbody>
     {% for product in object_list %}
     <tr>
+      <td>
+        <div>
+          <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-height: 100px;">
+        </div>
+      </td>
       <td>{{ product.name }}</td>
       <td>${{ product.price }}</td>
       <td>
