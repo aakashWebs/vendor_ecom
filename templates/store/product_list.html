@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your Products</h1>
+
+<a href="{% url 'store:product_add' %}" class="btn btn-primary mb-3">Add New Product</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in object_list %}
+    <tr>
+      <td>{{ product.name }}</td>
+      <td>${{ product.price }}</td>
+      <td>
+        <a href="{% url 'store:product_edit' product.pk %}" class="btn btn-sm btn-primary">Edit</a>
+        <a href="{% url 'store:product_delete' product.pk %}" class="btn btn-sm btn-danger">Delete</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="3">No products found.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<a href="{% url 'store:dashboard' %}" class="btn btn-secondary">Back to Dashboard</a>
+{% endblock %}

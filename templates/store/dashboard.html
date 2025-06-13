@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Vendor Dashboard</h1>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Your Categories</h4>
+                </div>
+                <div class="card-body">
+                    {% if categories %}
+                        <ul class="list-group">
+                            {% for category in categories %}
+                                <li class="list-group-item">{{ category.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">No categories yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Your Products</h4>
+                </div>
+                <div class="card-body">
+                    {% if products %}
+                        <ul class="list-group">
+                            {% for product in products %}
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>{{ product.name }}</span>
+                                    <span class="badge bg-secondary">₹{{ product.price }}</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">No products yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'store:category_list' %}" class="btn btn-outline-primary me-2">Manage Categories</a>
+        <a href="{% url 'store:product_list' %}" class="btn btn-outline-success">Manage Products</a>
+    </div>
+</div>
+{% endblock %}
