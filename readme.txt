@@ -8,6 +8,7 @@ Setup Instructions:
 5. Run the development server: python manage.py runserver
 6. Access the site at http://127.0.0.1:8000/store/dashboard/ (login required)
 7. Access the admin panel at http://127.0.0.1:8000/admin/
+8. Added DRF for APIs 
 
 Key Features:
 - Vendor authentication using Django's built-in User model.
