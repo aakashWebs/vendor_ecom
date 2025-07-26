@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vendor-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vendor-web
+  template:
+    metadata:
+      labels:
+        app: vendor-web
+    spec:
+      containers:
+        - name: vendor-web
+          image: yaakash281/aakashweb:latest
+          ports:
+            - containerPort: 8000
+      imagePullSecrets:
+        - name: regcred

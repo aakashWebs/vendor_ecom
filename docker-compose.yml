@@ -1,0 +1,48 @@
+services:
+  web:
+    image: vendor_web_app:latest
+    container_name: vendor_web_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=1
+      - CELERY_BROKER_URL=redis://redis_broker:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis_broker:6379/0
+
+  redis_broker:
+    image: redis:7
+    container_name: redis_broker
+    ports:
+      - "6379:6379"
+
+  celery:
+    image: celery_worker:latest
+    container_name: celery
+    command: celery -A vendor_ecom worker --loglevel=info
+    depends_on:
+      - redis_broker
+    volumes:
+      - .:/app
+
+  flower:
+    image: mher/flower
+    container_name: flower
+    environment:
+      - CELERY_BROKER_URL=redis://redis_broker:6379/0
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis_broker
+      - celery
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis_commander
+    environment:
+      - REDIS_HOSTS=local:redis_broker:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis_broker
