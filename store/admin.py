@@ -6,6 +6,10 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'vendor', 'created_at')
     search_fields = ('name', 'vendor__username')
     list_filter = ('created_at',)
+    class Media:
+        css = {
+            'all': ('admin/custom_admin.css',)
+        }
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):

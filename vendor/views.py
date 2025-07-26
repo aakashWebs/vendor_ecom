@@ -10,12 +10,20 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
 from django.shortcuts import render
+from vendor.tasks import fetch_data_from_api
+import requests
 
 class VendorRegisterView(APIView):
     permission_classes = []
 
     def get(self, request):
         return Response({"detail": "Send a POST request with username, email, and password to register."})
+    
+    # def post(self, request):
+        #  response = requests.get('https://jsonplaceholder.typicode.com/posts/1')
+        #  fetch_data_from_api.delay('https://jsonplaceholder.typicode.com/posts')
+        #  return Response({'status':1}, status=200)
+
 
     def post(self, request):
         serializer = UserSerializer(data=request.data)

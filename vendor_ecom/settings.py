@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'store',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'vendor'
 ]
 
 TEMPLATES = [
@@ -141,3 +142,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Redirect URL after login
 LOGIN_REDIRECT_URL = '/store/dashboard/'
 LOGOUT_REDIRECT_URL = '/'  # ✅ This is fine, it just redirects *after* logout
+
+
+
+# settings.py
+
+
+# (Optional)
+# CELERY_RESULT_BACKEND = 'django-db'  # Only if you're using django-celery-results
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST_USER = 'from@example.com'
+
+CELERY_BROKER_URL = 'redis://redis_broker:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis_broker:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json' # ✅ This is fine   
